@@ -1,0 +1,29 @@
+appId: de.pam-nm.bauplan-erfassung
+productName: Bauplan Erfassung
+directories:
+  buildResources: resources
+  output: dist
+files:
+  - out/**/*
+  - package.json
+extraResources:
+  - from: resources/PTSansNarrow-Bold.ttf
+    to: PTSansNarrow-Bold.ttf
+win:
+  icon: resources/icon.ico
+  target:
+    - target: nsis
+      arch:
+        - x64
+nsis:
+  # E32: Assistent, Installation pro Benutzer ohne Adminrechte, Deutsch, Verknüpfungen, Daten bleiben bei Deinstallation
+  oneClick: false
+  perMachine: false
+  allowElevation: false
+  allowToChangeInstallationDirectory: false
+  installerLanguages:
+    - de_DE
+  language: '1031'
+  createDesktopShortcut: always
+  createStartMenuShortcut: true
+  deleteAppDataOnUninstall: false

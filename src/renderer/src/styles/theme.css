@@ -1,0 +1,57 @@
+/* Zentrale Gestaltungsgrundlagen: Farben, Abstände, Schriften. */
+
+@font-face {
+  font-family: 'PT Sans Narrow';
+  font-weight: 700;
+  font-style: normal;
+  src: url('../../../../resources/PTSansNarrow-Bold.ttf') format('truetype');
+}
+
+:root {
+  /* Farben */
+  --farbe-akzent: #f07820;
+  --farbe-akzent-hell: #fdebdc;
+  --farbe-hintergrund: #f6f6f4;
+  --farbe-flaeche: #ffffff;
+  --farbe-navigation: #ffffff;
+  --farbe-rahmen: #e2e2de;
+  --farbe-text: #2b2b2b;
+  --farbe-text-gedaempft: #6b6b66;
+  --farbe-fehler: #b3261e;
+  --farbe-fehler-hell: #fbeaea;
+  --farbe-fehler-dunkel: #8c1d17;
+  --farbe-akzent-dunkel: #d4630f;
+  --farbe-fokus: rgba(240, 120, 32, 0.35);
+  --farbe-abdunklung: rgba(30, 30, 30, 0.35);
+  --farbe-erfolg: #2e7d32;
+  --farbe-farbig: #7a3fb0;
+  --farbe-farbig-hell: #f1e8f9;
+
+  /* Abstände */
+  --abstand-xs: 4px;
+  --abstand-s: 8px;
+  --abstand-m: 16px;
+  --abstand-l: 24px;
+  --abstand-xl: 32px;
+
+  /* Radien */
+  --radius-s: 4px;
+  --radius-m: 6px;
+
+  /* Schatten */
+  --schatten-dialog: 0 12px 32px rgba(0, 0, 0, 0.18);
+  --schatten-liste: 0 6px 18px rgba(0, 0, 0, 0.12);
+  --schatten-leiste: 0 -4px 12px rgba(0, 0, 0, 0.05);
+
+  /* Schriften */
+  --schrift-system: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --schrift-marke: 'PT Sans Narrow', 'Arial Narrow', sans-serif;
+  --schriftgroesse-basis: 14px;
+  --schriftgroesse-titel: 22px;
+  --schriftgroesse-marke: 28px;
+
+  /* Maße */
+  --breite-navigation: 220px;
+  --breite-kundenliste: 320px;
+  --groesse-thumbnail: 56px;
+}

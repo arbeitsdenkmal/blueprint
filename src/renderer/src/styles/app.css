@@ -1,0 +1,1399 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--schrift-system);
+  font-size: var(--schriftgroesse-basis);
+  color: var(--farbe-text);
+  background: var(--farbe-hintergrund);
+}
+
+.app {
+  display: flex;
+  height: 100%;
+}
+
+.navigation {
+  width: var(--breite-navigation);
+  flex-shrink: 0;
+  background: var(--farbe-navigation);
+  border-right: 1px solid var(--farbe-rahmen);
+  padding: var(--abstand-l) var(--abstand-m);
+}
+
+.marke {
+  font-family: var(--schrift-marke);
+  font-weight: 700;
+  font-size: var(--schriftgroesse-marke);
+  color: var(--farbe-akzent);
+  padding: 0 var(--abstand-s) var(--abstand-l);
+}
+
+.navigation-liste {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--abstand-xs);
+}
+
+.navigation-eintrag {
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  color: var(--farbe-text);
+  background: transparent;
+  border: none;
+  border-left: 3px solid transparent;
+  border-radius: var(--radius-s);
+  padding: var(--abstand-s) var(--abstand-m);
+  cursor: pointer;
+}
+
+.navigation-eintrag:hover {
+  background: var(--farbe-hintergrund);
+}
+
+.navigation-eintrag.aktiv {
+  background: var(--farbe-akzent-hell);
+  border-left-color: var(--farbe-akzent);
+  font-weight: 600;
+}
+
+.inhalt {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  padding: var(--abstand-xl);
+}
+
+.inhalt h1 {
+  font-size: var(--schriftgroesse-titel);
+  font-weight: 600;
+  margin: 0 0 var(--abstand-m);
+}
+
+.platzhalter {
+  color: var(--farbe-text-gedaempft);
+}
+
+/* ---------- Bedienelemente ---------- */
+
+.eingabe {
+  font: inherit;
+  color: var(--farbe-text);
+  background: var(--farbe-flaeche);
+  border: 1px solid var(--farbe-rahmen);
+  border-radius: var(--radius-s);
+  padding: var(--abstand-s) var(--abstand-s);
+  min-width: 0;
+  width: 100%;
+}
+
+.eingabe:focus {
+  outline: none;
+  border-color: var(--farbe-akzent);
+  box-shadow: 0 0 0 3px var(--farbe-fokus);
+}
+
+.eingabe.fehlerhaft {
+  border-color: var(--farbe-fehler);
+}
+
+.knopf {
+  font: inherit;
+  white-space: nowrap;
+  color: var(--farbe-text);
+  background: var(--farbe-flaeche);
+  border: 1px solid var(--farbe-rahmen);
+  border-radius: var(--radius-s);
+  padding: var(--abstand-s) var(--abstand-m);
+  cursor: pointer;
+}
+
+.knopf:hover:not(:disabled) {
+  border-color: var(--farbe-text-gedaempft);
+}
+
+.knopf:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--farbe-fokus);
+}
+
+.knopf:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.knopf-primaer {
+  color: #fff;
+  background: var(--farbe-akzent);
+  border-color: var(--farbe-akzent);
+}
+
+.knopf-primaer:hover:not(:disabled) {
+  background: var(--farbe-akzent-dunkel);
+  border-color: var(--farbe-akzent-dunkel);
+}
+
+.knopf-gefahr {
+  color: #fff;
+  background: var(--farbe-fehler);
+  border-color: var(--farbe-fehler);
+}
+
+.knopf-gefahr:hover:not(:disabled) {
+  background: var(--farbe-fehler-dunkel);
+  border-color: var(--farbe-fehler-dunkel);
+}
+
+.knopf-gefahr-umriss {
+  color: var(--farbe-fehler);
+}
+
+.knopf-gefahr-umriss:hover:not(:disabled) {
+  border-color: var(--farbe-fehler);
+}
+
+.schalter {
+  display: flex;
+  align-items: center;
+  gap: var(--abstand-s);
+  cursor: pointer;
+}
+
+.schalter input {
+  accent-color: var(--farbe-akzent);
+}
+
+.feldfehler {
+  color: var(--farbe-fehler);
+  font-size: 13px;
+  margin-top: var(--abstand-xs);
+}
+
+.kennzeichen {
+  flex-shrink: 0;
+  font-size: 12px;
+  color: var(--farbe-text-gedaempft);
+  background: var(--farbe-hintergrund);
+  border: 1px solid var(--farbe-rahmen);
+  border-radius: var(--radius-s);
+  padding: 1px var(--abstand-s);
+}
+
+.hinweis {
+  color: var(--farbe-text-gedaempft);
+  margin: var(--abstand-s) 0;
+}
+
+.aktionen {
+  display: flex;
+  gap: var(--abstand-s);
+  flex-shrink: 0;
+}
+
+/* ---------- Namensfeld ---------- */
+
+.namensfeld {
+  min-width: 0;
+}
+
+.namensfeld-zeile {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--abstand-s);
+}
+
+.namensfeld-zeile .eingabe {
+  flex: 1 1 0;
+}
+
+/* In der schmalen Kundenliste stehen die Schaltflächen unter dem Feld. */
+.stammdaten-liste .namensfeld-zeile .eingabe {
+  flex-basis: 100%;
+}
+
+/* ---------- Bestätigungsdialog ---------- */
+
+.dialog-hintergrund {
+  position: fixed;
+  inset: 0;
+  background: var(--farbe-abdunklung);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.dialog {
+  width: 440px;
+  max-width: calc(100% - 2 * var(--abstand-l));
+  background: var(--farbe-flaeche);
+  border-radius: var(--radius-m);
+  box-shadow: var(--schatten-dialog);
+  padding: var(--abstand-l);
+}
+
+.dialog h2 {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 0 0 var(--abstand-m);
+}
+
+.dialog p,
+.dialog-text {
+  margin: 0 0 var(--abstand-m);
+  line-height: 1.45;
+}
+
+.dialog-text p {
+  margin: 0 0 var(--abstand-s);
+}
+
+.dialog-fehler {
+  color: var(--farbe-fehler);
+  background: var(--farbe-fehler-hell);
+  border-radius: var(--radius-s);
+  padding: var(--abstand-s) var(--abstand-m);
+  margin-bottom: var(--abstand-m);
+}
+
+.dialog-aktionen {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--abstand-s);
+}
+
+/* ---------- Stammdaten ---------- */
+
+.stammdaten {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  gap: var(--abstand-l);
+}
+
+.stammdaten-liste {
+  width: var(--breite-kundenliste);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--abstand-m);
+  min-height: 0;
+}
+
+.stammdaten-liste > .knopf {
+  align-self: flex-start;
+}
+
+.kundenliste {
+  list-style: none;
+  margin: 0;
+  padding: var(--abstand-xs);
+  flex: 1;
+  overflow: auto;
+  background: var(--farbe-flaeche);
+  border: 1px solid var(--farbe-rahmen);
+  border-radius: var(--radius-m);
+}
+
+.kunden-eintrag {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--abstand-s);
+  text-align: left;
+  font: inherit;
+  color: var(--farbe-text);
+  background: transparent;
+  border: none;
+  border-left: 3px solid transparent;
+  border-radius: var(--radius-s);
+  padding: var(--abstand-s) var(--abstand-m);
+  cursor: pointer;
+}
+
+.kunden-eintrag:hover {
+  background: var(--farbe-hintergrund);
+}
+
+.kunden-eintrag.aktiv {
+  background: var(--farbe-akzent-hell);
+  border-left-color: var(--farbe-akzent);
+}
+
+.kunden-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.kunden-eintrag.archiviert .kunden-name,
+.bauvorhaben-eintrag.archiviert .eingabe {
+  color: var(--farbe-text-gedaempft);
+  font-style: italic;
+}
+
+.liste-leer {
+  color: var(--farbe-text-gedaempft);
+  padding: var(--abstand-s) var(--abstand-m);
+}
+
+.stammdaten-detail {
+  flex: 1;
+  min-width: 0;
+  overflow: auto;
+  background: var(--farbe-flaeche);
+  border: 1px solid var(--farbe-rahmen);
+  border-radius: var(--radius-m);
+  padding: var(--abstand-l);
+  display: flex;
+  flex-direction: column;
+  gap: var(--abstand-m);
+}
+
+.detail-kopf {
+  display: flex;
+  align-items: center;
+  gap: var(--abstand-s);
+}
+
+.detail-kopf h2 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.bauvorhaben-kopf {
+  margin-top: var(--abstand-m);
+  padding-top: var(--abstand-l);
+  border-top: 1px solid var(--farbe-rahmen);
+}
+
+.bauvorhaben-liste {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--abstand-s);
+}
+
+.bauvorhaben-zeile {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--abstand-s);
+}
+
+.bauvorhaben-zeile > .namensfeld {
+  flex: 1;
+}
+
+.bauvorhaben-zeile > .kennzeichen {
+  margin-top: var(--abstand-s);
+}
+
+/* ---------- Allgemein ---------- */
+
+.versteckt {
+  display: none;
+}
+
+.gedaempft {
+  color: var(--farbe-text-gedaempft);
+}
+
+.rechts {
+  text-align: right;
+}
+
+.mitte {
+  text-align: center;
+}
+
+.zahlenwert {
+  font-variant-numeric: tabular-nums;
+}
+
+.knopf-klein {
+  padding: var(--abstand-xs) var(--abstand-s);
+  font-size: 13px;
+}
+
+.knopf-symbol {
+  font: inherit;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--farbe-text-gedaempft);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-s);
+  padding: var(--abstand-xs) var(--abstand-s);
+  cursor: pointer;
+}
+
+.knopf-symbol:hover {
+  color: var(--farbe-fehler);
+  background: var(--farbe-fehler-hell);
+}
+
+.knopf-symbol:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--farbe-fokus);
+}
+
+.tabelle {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--farbe-flaeche);
+  border: 1px solid var(--farbe-rahmen);
+  border-radius: var(--radius-m);
+}
+
+.tabelle th,
+.tabelle td {
+  padding: var(--abstand-s) var(--abstand-m);
+  border-bottom: 1px solid var(--farbe-rahmen);
+  text-align: left;
+}
+
+.tabelle th.rechts,
+.tabelle td.rechts {
+  text-align: right;
+}
+
+.tabelle th.mitte,
+.tabelle td.mitte {
+  text-align: center;
+}
+
+.tabelle th {
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--farbe-text-gedaempft);
+}
+
+/* ---------- Suchauswahl ---------- */
+
+.suchauswahl {
+  position: relative;
+}
+
+.suchauswahl-liste {
+  position: absolute;
+  z-index: 5;
+  top: calc(100% + 2px);
+  left: 0;
+  right: 0;
+  max-height: 280px;
+  overflow: auto;
+  list-style: none;
+  margin: 0;
+  padding: var(--abstand-xs);
+  background: var(--farbe-flaeche);
+  border: 1px solid var(--farbe-rahmen);
+  border-radius: var(--radius-s);
+  box-shadow: var(--schatten-liste);
+}
+
+.suchauswahl-eintrag,
+.suchauswahl-leer {
+  padding: var(--abstand-s) var(--abstand-s);
+  border-radius: var(--radius-s);
+}
+
+.suchauswahl-eintrag {
+  cursor: pointer;
+}
+
+.suchauswahl-eintrag.markiert {
+  background: var(--farbe-akzent-hell);
+}
+
+.suchauswahl-eintrag.gewaehlt {
+  font-weight: 600;
+}
+
+.suchauswahl-eintrag.neu {
+  color: var(--farbe-akzent-dunkel);
+}
+
+.suchauswahl-leer {
+  color: var(--farbe-text-gedaempft);
+}
+
+/* ---------- Erfassung ---------- */
+
+.erfassung {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.erfassung-inhalt {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--abstand-m);
+  padding-bottom: var(--abstand-l);
+}
+
+.erfassung-kopf {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 2fr) minmax(150px, 1fr);
+  gap: var(--abstand-m);
+  align-items: start;
+}
+
+.feld {
+  display: flex;
+  flex-direction: column;
+  gap: var(--abstand-xs);
+  min-width: 0;
+}
+
+.feld-beschriftung {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--farbe-text-gedaempft);
+}
+
+.bearbeitungshinweis {
+  color: var(--farbe-akzent-dunkel);
+  background: var(--farbe-akzent-hell);
+  border-left: 3px solid var(--farbe-akzent);
+  border-radius: var(--radius-s);
+  padding: var(--abstand-s) var(--abstand-m);
+  font-weight: 600;
+}
+
+.ablage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--abstand-m);
+}
+
+.ablageflaeche {
+  min-width: 0;
+  min-height: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--abstand-xs);
+  text-align: center;
+  color: var(--farbe-text-gedaempft);
+  background: var(--farbe-flaeche);
+  border: 2px dashed var(--farbe-rahmen);
+  border-radius: var(--radius-m);
+  padding: var(--abstand-s) var(--abstand-m);
+  cursor: pointer;
+}
+
+.ablageflaeche strong {
+  color: var(--farbe-text);
+  font-size: 15px;
+}
+
+.ablageflaeche:hover,
+.ablageflaeche.ueber {
+  border-color: var(--farbe-akzent);
+  background: var(--farbe-akzent-hell);
+}
+
+.ablageflaeche:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--farbe-fokus);
+}
+
+.ablageflaeche.beschaeftigt {
+  cursor: progress;
+  border-style: solid;
+}
+
+.fortschritt {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--abstand-xs);
+  color: var(--farbe-text);
+}
+
+.fortschritt-datei {
+  font-size: 13px;
+  color: var(--farbe-text-gedaempft);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fortschritt-balken {
+  height: 6px;
+  background: var(--farbe-hintergrund);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.fortschritt-wert {
+  height: 100%;
+  background: var(--farbe-akzent);
+  transition: width 0.15s;
+}
+
+.hinweisliste {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--abstand-xs);
+}
+
+.hinweisliste li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--abstand-s);
+  color: var(--farbe-fehler-dunkel);
+  background: var(--farbe-fehler-hell);
+  border-radius: var(--radius-s);
+  padding: var(--abstand-xs) var(--abstand-xs) var(--abstand-xs) var(--abstand-m);
+}
+
+/* ---------- Positionsliste ---------- */
+
+.listenkopf {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: calc(-1 * var(--abstand-s));
+}
+
+.anzahl-fuer-alle {
+  display: flex;
+  align-items: center;
+  gap: var(--abstand-s);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--farbe-text-gedaempft);
+}
+
+.positionen-rahmen {
+  flex-shrink: 0;
+  background: var(--farbe-flaeche);
+  border: 1px solid var(--farbe-rahmen);
+  border-radius: var(--radius-m);
+  overflow: hidden;
+}
+
+.positionen {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.positionen th {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--farbe-text-gedaempft);
+  text-align: left;
+  padding: var(--abstand-xs);
+  border-bottom: 1px solid var(--farbe-rahmen);
+  white-space: nowrap;
+}
+
+.positionen td {
+  padding: 1px var(--abstand-xs);
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.positionen th:first-child,
+.positionen td:first-child {
+  padding-left: var(--abstand-s);
+}
+
+.positionen th.rechts,
+.positionen td.rechts {
+  text-align: right;
+}
+
+.positionen th.mitte,
+.positionen td.mitte {
+  text-align: center;
+}
+
+.positionen tbody tr + tr td {
+  border-top: 1px solid var(--farbe-hintergrund);
+}
+
+.dateigruppe + .dateigruppe tr:first-child td {
+  border-top: 1px solid var(--farbe-rahmen);
+}
+
+.dateikopf td {
+  background: var(--farbe-hintergrund);
+}
+
+.dateikopf-inhalt {
+  display: flex;
+  align-items: baseline;
+  gap: var(--abstand-s);
+  min-width: 0;
+}
+
+.datei-name {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dateikopf-info {
+  flex-shrink: 0;
+  font-size: 12px;
+  color: var(--farbe-text-gedaempft);
+}
+
+.seitenname {
+  padding-left: var(--abstand-m);
+  color: var(--farbe-text-gedaempft);
+}
+
+/* Spaltenbreiten (table-layout: fixed): Datei nimmt den Rest. */
+.spalte-vorschau {
+  width: 48px;
+}
+
+.positionen th:nth-child(3) {
+  width: 158px;
+}
+
+.positionen th:nth-child(4) {
+  width: 62px;
+}
+
+.positionen th:nth-child(5) {
+  width: 94px;
+}
+
+.positionen th.spalte-schalter {
+  width: 66px;
+}
+
+.positionen th:nth-child(8) {
+  width: 54px;
+}
+
+.positionen th.spalte-entfernen {
+  width: 34px;
+}
+
+.spalte-datei {
+  overflow: hidden;
+}
+
+.thumbnail {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px;
+  background: var(--farbe-flaeche);
+  border: 1px solid var(--farbe-rahmen);
+  border-radius: var(--radius-s);
+}
+
+button.thumbnail {
+  cursor: zoom-in;
+}
+
+button.thumbnail:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--farbe-fokus);
+}
+
+.thumbnail img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.thumbnail.leer {
+  color: var(--farbe-text-gedaempft);
+  background: var(--farbe-hintergrund);
+}
+
+.klappen {
+  width: 32px;
+  font: inherit;
+  color: var(--farbe-text-gedaempft);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-s);
+  cursor: pointer;
+}
+
+.klappen:hover {
+  color: var(--farbe-text);
+}
+
+.klappen:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--farbe-fokus);
+}
+
+.eingabe.zahl {
+  width: 40px;
+  padding: 2px var(--abstand-xs);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.eingabe.fehlerhaft {
+  background: var(--farbe-fehler-hell);
+}
+
+.anzahlfeld {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.anzahl-knopf {
+  width: 22px;
+  height: 24px;
+  padding: 0;
+  font: inherit;
+  line-height: 1;
+  color: var(--farbe-text);
+  background: var(--farbe-flaeche);
+  border: 1px solid var(--farbe-rahmen);
+  border-radius: var(--radius-s);
+  cursor: pointer;
+}
+
+.anzahl-knopf:hover:not(:disabled) {
+  background: var(--farbe-hintergrund);
+}
+
+.anzahl-knopf:disabled {
+  color: var(--farbe-rahmen);
+  cursor: default;
+}
+
+.format {
+  max-width: 100%;
+  font: inherit;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  text-align: left;
+  color: var(--farbe-text);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-s);
+  padding: 2px var(--abstand-xs);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: text;
+}
+
+.format:hover {
+  border-color: var(--farbe-rahmen);
+}
+
+.format:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--farbe-fokus);
+}
+
+.format.fehlerhaft {
+  color: var(--farbe-fehler);
+  background: var(--farbe-fehler-hell);
+}
+
+.format-bearbeitung {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--abstand-xs);
+  font-size: 13px;
+}
+
+.format-bearbeitung .eingabe.zahl {
+  width: 46px;
+}
+
+.farbe {
+  font: inherit;
+  font-size: 12px;
+  min-width: 52px;
+  padding: 1px var(--abstand-xs);
+  color: var(--farbe-text-gedaempft);
+  background: var(--farbe-flaeche);
+  border: 1px solid var(--farbe-rahmen);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.farbe.farbig {
+  color: var(--farbe-farbig);
+  background: var(--farbe-farbig-hell);
+  border-color: var(--farbe-farbig);
+  font-weight: 600;
+}
+
+.farbe:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--farbe-fokus);
+}
+
+.kippschalter {
+  position: relative;
+  width: 30px;
+  height: 16px;
+  padding: 0;
+  vertical-align: middle;
+  background: var(--farbe-rahmen);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.kippschalter.an {
+  background: var(--farbe-akzent);
+}
+
+.kippschalter-knopf {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  border-radius: 50%;
+  transition: left 0.12s;
+}
+
+.kippschalter.an .kippschalter-knopf {
+  left: 16px;
+}
+
+.kippschalter:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--farbe-fokus);
+}
+
+.spaltenkopf-knopf {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  border-bottom: 1px dashed var(--farbe-text-gedaempft);
+  padding: 0;
+  cursor: pointer;
+}
+
+.spaltenkopf-knopf:hover:not(:disabled) {
+  color: var(--farbe-text);
+}
+
+.spaltenkopf-knopf:disabled {
+  border-bottom-color: transparent;
+  cursor: default;
+}
+
+.kassenleiste input[type='checkbox'] {
+  accent-color: var(--farbe-akzent);
+  width: 16px;
+  height: 16px;
+}
+
+/* ---------- Offene Vorgänge ---------- */
+
+.offene-vorgaenge {
+  margin-top: var(--abstand-m);
+}
+
+.offene-vorgaenge h2 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 var(--abstand-s);
+}
+
+.tabelle tr.in-bearbeitung td {
+  background: var(--farbe-akzent-hell);
+}
+
+.aktionen-zelle {
+  white-space: nowrap;
+  text-align: right;
+}
+
+.aktionen-zelle .knopf + .knopf {
+  margin-left: var(--abstand-s);
+}
+
+/* ---------- Kassenleiste ---------- */
+
+.kassenleiste {
+  flex-shrink: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--abstand-s) var(--abstand-l);
+  margin: 0 calc(-1 * var(--abstand-xl)) calc(-1 * var(--abstand-xl));
+  padding: var(--abstand-s) var(--abstand-xl);
+  background: var(--farbe-flaeche);
+  border-top: 1px solid var(--farbe-rahmen);
+  box-shadow: var(--schatten-leiste);
+}
+
+.kassenwerte {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--abstand-s) var(--abstand-l);
+  margin: 0;
+}
+
+.kassenwert dt {
+  font-size: 12px;
+  color: var(--farbe-text-gedaempft);
+}
+
+.kassenwert dd {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.kassenleiste-aktionen {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--abstand-s);
+}
+
+.meldung {
+  font-size: 13px;
+  color: var(--farbe-text-gedaempft);
+  max-width: 320px;
+}
+
+.meldung.erfolg {
+  color: var(--farbe-erfolg);
+}
+
+.meldung.fehler {
+  color: var(--farbe-fehler);
+}
+
+/* ---------- Vorschau ---------- */
+
+.dialog.vorschau {
+  width: auto;
+  max-width: calc(100vw - 2 * var(--abstand-xl));
+  max-height: calc(100vh - 2 * var(--abstand-xl));
+  display: flex;
+  flex-direction: column;
+  gap: var(--abstand-m);
+}
+
+.vorschau-kopf {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--abstand-m);
+}
+
+.vorschau-kopf h2 {
+  margin: 0;
+}
+
+.vorschau-bild {
+  min-height: 0;
+  max-width: 100%;
+  max-height: calc(100vh - 2 * var(--abstand-xl) - 120px);
+  object-fit: contain;
+  border: 1px solid var(--farbe-rahmen);
+}
+
+/* ---------- Abrechnung ---------- */
+
+.abrechnung {
+  display: flex;
+  flex-direction: column;
+  gap: var(--abstand-m);
+  padding-bottom: var(--abstand-l);
+}
+
+.abrechnung h2 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: var(--abstand-s) 0 0;
+}
+
+.abrechnung h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin: var(--abstand-m) 0 var(--abstand-s);
+}
+
+.abrechnung h4 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: var(--abstand-m) 0 var(--abstand-s);
+  display: flex;
+  align-items: center;
+  gap: var(--abstand-s);
+}
+
+.abrechnung-kundenwahl {
+  max-width: 420px;
+}
+
+.abrechnung-kopf {
+  display: flex;
+  align-items: center;
+  gap: var(--abstand-m);
+}
+
+.abrechnung-kopf h2 {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--abstand-s);
+}
+
+.filterleiste {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--abstand-m);
+  background: var(--farbe-flaeche);
+  border: 1px solid var(--farbe-rahmen);
+  border-radius: var(--radius-m);
+  padding: var(--abstand-m);
+}
+
+.filterleiste .feld {
+  width: 170px;
+}
+
+.filterleiste .feld:last-child {
+  width: 240px;
+}
+
+.schnellwahl {
+  display: flex;
+  gap: var(--abstand-xs);
+  padding-bottom: 3px;
+}
+
+.knopf.aktiv {
+  border-color: var(--farbe-akzent);
+  background: var(--farbe-akzent-hell);
+}
+
+select.eingabe {
+  height: 36px;
+}
+
+.meldungsleiste {
+  display: flex;
+  align-items: center;
+  gap: var(--abstand-m);
+  border-radius: var(--radius-s);
+  padding: var(--abstand-s) var(--abstand-m);
+}
+
+.meldungsleiste.erfolg {
+  color: var(--farbe-erfolg);
+  background: #e8f4e9;
+}
+
+.meldungsleiste.fehler {
+  color: var(--farbe-fehler);
+  background: var(--farbe-fehler-hell);
+}
+
+.text-fehler {
+  color: var(--farbe-fehler);
+}
+
+.abrechnungsgruppe .tabelle td {
+  padding: var(--abstand-xs) var(--abstand-s);
+  font-size: 13px;
+}
+
+.abrechnungsgruppe .tabelle th {
+  padding: var(--abstand-s);
+}
+
+.abrechnungsgruppe tr.vorgangsbeginn td {
+  border-top: 2px solid var(--farbe-rahmen);
+}
+
+.abrechnungsgruppe td.dateiname {
+  max-width: 260px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.zwischensumme,
+.gesamtkarte {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--abstand-s) var(--abstand-l);
+  padding: var(--abstand-s) var(--abstand-m);
+}
+
+.zwischensumme {
+  background: var(--farbe-hintergrund);
+}
+
+.zwischensumme .kassenwert dd {
+  font-size: 14px;
+}
+
+.gesamtkarte {
+  margin-top: var(--abstand-m);
+  background: var(--farbe-flaeche);
+  border: 1px solid var(--farbe-rahmen);
+  border-left: 3px solid var(--farbe-akzent);
+  border-radius: var(--radius-m);
+  padding: var(--abstand-m);
+}
+
+.gesamtkarte .knopf {
+  margin-left: auto;
+}
+
+.bisherige-abrechnungen {
+  margin-top: var(--abstand-m);
+}
+
+.bisherige-abrechnungen td {
+  white-space: nowrap;
+}
+
+/* ---------- Hinweisleiste ---------- */
+
+.hinweisleiste {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--abstand-m);
+  margin: calc(-1 * var(--abstand-m)) 0 var(--abstand-m);
+  padding: var(--abstand-s) var(--abstand-m);
+  color: var(--farbe-fehler-dunkel);
+  background: var(--farbe-fehler-hell);
+  border-left: 3px solid var(--farbe-fehler);
+  border-radius: var(--radius-s);
+}
+
+.inhalt > .meldungsleiste {
+  justify-content: space-between;
+  margin-bottom: var(--abstand-m);
+}
+
+/* ---------- Einstellungen ---------- */
+
+.einstellungen {
+  display: flex;
+  flex-direction: column;
+  gap: var(--abstand-l);
+  max-width: 980px;
+  padding-bottom: var(--abstand-l);
+}
+
+.einstellungen-abschnitt {
+  display: flex;
+  flex-direction: column;
+  gap: var(--abstand-m);
+  background: var(--farbe-flaeche);
+  border: 1px solid var(--farbe-rahmen);
+  border-radius: var(--radius-m);
+  padding: var(--abstand-l);
+}
+
+.einstellungen-abschnitt h2 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.einstellungen-abschnitt h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: var(--abstand-s) 0 0;
+}
+
+.einstellung .hinweis {
+  margin: 0;
+  font-size: 13px;
+}
+
+.ordnerfeld {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--abstand-s);
+}
+
+.ordnerfeld > .namensfeld {
+  flex: 1;
+}
+
+.einstellung-anzahl .namensfeld {
+  max-width: 320px;
+}
+
+.einstellungen-aktionen {
+  display: flex;
+  align-items: center;
+  gap: var(--abstand-m);
+}
+
+.infoliste {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: var(--abstand-s) var(--abstand-l);
+  margin: 0;
+}
+
+.infoliste dt {
+  color: var(--farbe-text-gedaempft);
+}
+
+.infoliste dd {
+  margin: 0;
+}
+
+.infoliste .pfad {
+  word-break: break-all;
+}

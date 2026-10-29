@@ -1,0 +1,37 @@
+# Abhängigkeiten
+node_modules/
+
+# Build-Ausgaben
+out/
+dist/
+alt/dist/
+alt/build/
+*.tsbuildinfo
+
+# Datenbanken / lokale Daten
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Kundendaten der alten App
+alt/Baupl*ne/
+alt/kunden.txt
+
+# Echte Konfiguration mit Schlüsseln (Beispiel-Configs bleiben versioniert)
+.env
+.env.*
+!.env.example
+*.local.json
+!*.example.json
+
+# System / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Upload-Hilfsarchiv
+projekt-upload.tgz
